@@ -92,3 +92,22 @@ npm run build
 ```
 
 Or push to GitHub and connect to Vercel for automatic deployments.
+
+### Vercel `NOT_FOUND` ([docs](https://vercel.com/docs/errors/NOT_FOUND))
+
+That error is an **HTTP 404**: the requested **deployment URL** or **path** does not exist or is wrong. It is **not** caused by using the `main` branch by itself.
+
+**Checklist**
+
+1. **Deployment exists** — In Vercel → **Deployments**, open the latest build and confirm it **succeeded** (green). A failed build does not replace the previous live deployment; bookmarked URLs can point at removed previews.
+2. **Correct URL** — Use the **Visit** / production URL from the dashboard. Preview URLs (`*.vercel.app` with a git hash) belong to one deployment only.
+3. **Root Directory** — **Project → Settings → General → Root Directory** must be the folder that contains `package.json` (usually `.` for this repo). Wrong root builds the wrong app or nothing useful.
+4. **Path** — Only routes that exist in the app respond (see `next build` output). `/`, `/privacy`, `/api/waitlist`, `/robots.txt`, `/sitemap.xml` are defined; anything else returns the app’s **404** page unless you add a route.
+
+**This repo**
+
+- `outputFileTracingRoot` is applied **only when not on Vercel** so local multi-lockfile setups still work; production tracing uses the deployment root.
+- `vercel.json` pins `framework: nextjs` and explicit install/build commands for predictable CI.
+- `engines.node` aligns with the Node version Vercel should use for Next.js 16.
+
+**Mental model:** **404** means “no resource at this URL” — either the **platform** (bad deployment link) or your **app router** (unknown path). Fix the URL or add a route; don’t confuse with **500** (server error).
