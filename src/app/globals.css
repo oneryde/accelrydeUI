@@ -1,17 +1,58 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-background: #09090B;
-  --color-foreground: #FAFAFA;
-  --color-card: #18181B;
-  --color-surface: #27272A;
-  --color-accent: #FF6600;
-  --color-accent-hover: #E65C00;
-  --color-secondary: #3B82F6;
-  --color-muted: #52525B;
-  --color-text-secondary: #A1A1AA;
+  /* Dark (default) */
+  --color-background: #09090b;
+  --color-foreground: #fafafa;
+  --color-card: #18181b;
+  --color-border: #27272a;
+  --color-muted: #52525b;
+  --color-muted-foreground: #a1a1aa;
+  --color-accent: #ff6600;
+  --color-accent-hover: #e65c00;
+  --color-secondary: #3b82f6;
+  --color-nav-scrolled: rgb(9 9 11 / 0.9);
+  --color-nav-border: rgb(255 255 255 / 0.06);
+  --color-divide: #18181b;
+  --color-hero-fade: #09090b;
+  --opacity-mesh-orange: 0.15;
+  --opacity-mesh-blue: 0.1;
+  --opacity-mesh-noise: 0.03;
+  --color-phone-frame: #0e0e10;
+  --color-phone-notch: #09090b;
+  --color-phone-home: #3f3f46;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+}
+
+/* Light: grey page chrome + near-white surfaces + dark text (no white-on-white) */
+html[data-theme="light"] {
+  --color-background: #e4e5ea;
+  --color-foreground: #111827;
+  --color-card: #f9fafb;
+  --color-border: #c8cad4;
+  --color-muted: #6b7280;
+  --color-muted-foreground: #4b5563;
+  --color-nav-scrolled: rgb(249 250 251 / 0.94);
+  --color-nav-border: rgb(17 24 39 / 0.08);
+  --color-divide: #d1d5dc;
+  --color-hero-fade: #e4e5ea;
+  --opacity-mesh-orange: 0.085;
+  --opacity-mesh-blue: 0.06;
+  --opacity-mesh-noise: 0.018;
+  /* Phone chrome: light bezel, inner app UIs stay dark in AppScreens */
+  --color-phone-frame: #eceef2;
+  --color-phone-notch: #d8dce4;
+  --color-phone-home: #9ca3af;
+  color-scheme: light;
+}
+
+/* Waitlist section glow (dark vs light) */
+.waitlist-ambient-glow {
+  opacity: 0.2;
+}
+html[data-theme="light"] .waitlist-ambient-glow {
+  opacity: 0.38;
 }
 
 /* Smooth scrolling */
@@ -49,7 +90,12 @@ body {
 /* Selection */
 ::selection {
   background: rgba(255, 102, 0, 0.3);
-  color: #FAFAFA;
+  color: var(--color-foreground);
+}
+
+html[data-theme="light"] ::selection {
+  background: rgba(255, 102, 0, 0.25);
+  color: var(--color-foreground);
 }
 
 /* Scrollbar */
@@ -57,22 +103,31 @@ body {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #09090B;
+  background: var(--color-background);
 }
 ::-webkit-scrollbar-thumb {
-  background: #27272A;
+  background: var(--color-border);
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #3f3f46;
+  background: var(--color-muted);
 }
 
 /* Gradient mesh animation */
 @keyframes mesh-drift {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  25% { transform: translate(30px, -50px) scale(1.05); }
-  50% { transform: translate(-20px, 20px) scale(0.95); }
-  75% { transform: translate(50px, 30px) scale(1.02); }
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(30px, -50px) scale(1.05);
+  }
+  50% {
+    transform: translate(-20px, 20px) scale(0.95);
+  }
+  75% {
+    transform: translate(50px, 30px) scale(1.02);
+  }
 }
 
 @keyframes fade-in-up {
@@ -87,8 +142,12 @@ body {
 }
 
 @keyframes fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .animate-fade-in-up {
@@ -99,9 +158,21 @@ body {
   animation: fade-in 0.6s ease-out forwards;
 }
 
-.animation-delay-100 { animation-delay: 100ms; }
-.animation-delay-200 { animation-delay: 200ms; }
-.animation-delay-300 { animation-delay: 300ms; }
-.animation-delay-400 { animation-delay: 400ms; }
-.animation-delay-500 { animation-delay: 500ms; }
-.animation-delay-600 { animation-delay: 600ms; }
+.animation-delay-100 {
+  animation-delay: 100ms;
+}
+.animation-delay-200 {
+  animation-delay: 200ms;
+}
+.animation-delay-300 {
+  animation-delay: 300ms;
+}
+.animation-delay-400 {
+  animation-delay: 400ms;
+}
+.animation-delay-500 {
+  animation-delay: 500ms;
+}
+.animation-delay-600 {
+  animation-delay: 600ms;
+}

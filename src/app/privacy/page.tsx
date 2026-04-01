@@ -14,16 +14,16 @@ export default function PrivacyPage() {
       <Navbar />
       <main className="pt-28 pb-20">
         <div className="max-w-3xl mx-auto px-6">
-          <h1 className="text-4xl font-bold tracking-tight text-[#FAFAFA] mb-2">
+          <h1 className="text-4xl font-bold tracking-tight text-foreground mb-2">
             Privacy Policy
           </h1>
-          <p className="text-sm text-[#52525B] mb-12">
+          <p className="text-sm text-muted mb-12">
             Last updated: April 1, 2026
           </p>
 
-          <div className="space-y-10 text-[#A1A1AA] leading-relaxed text-sm">
+          <div className="space-y-10 text-muted-foreground leading-relaxed text-sm">
             <section>
-              <h2 className="text-xl font-semibold text-[#FAFAFA] mb-3">
+              <h2 className="text-xl font-semibold text-foreground mb-3">
                 Overview
               </h2>
               <p>
@@ -35,22 +35,22 @@ export default function PrivacyPage() {
             </section>
 
             <section>
-              <h2 className="text-xl font-semibold text-[#FAFAFA] mb-3">
+              <h2 className="text-xl font-semibold text-foreground mb-3">
                 What we collect
               </h2>
               <ul className="list-disc list-inside space-y-2">
                 <li>
-                  <strong className="text-[#FAFAFA]">Email address</strong> —
+                  <strong className="text-foreground">Email address</strong> —
                   when you sign up for our beta waitlist.
                 </li>
                 <li>
-                  <strong className="text-[#FAFAFA]">Usage analytics</strong> —
+                  <strong className="text-foreground">Usage analytics</strong> —
                   we may use privacy-respecting analytics (e.g., page views,
                   referrer) to improve the site. No personal identifiers are
                   tracked.
                 </li>
                 <li>
-                  <strong className="text-[#FAFAFA]">Device information</strong>{" "}
+                  <strong className="text-foreground">Device information</strong>{" "}
                   — standard server logs may include browser type, operating
                   system, and IP address. These are used for security and
                   debugging only.
@@ -59,7 +59,7 @@ export default function PrivacyPage() {
             </section>
 
             <section>
-              <h2 className="text-xl font-semibold text-[#FAFAFA] mb-3">
+              <h2 className="text-xl font-semibold text-foreground mb-3">
                 Why we collect it
               </h2>
               <ul className="list-disc list-inside space-y-2">
@@ -70,7 +70,7 @@ export default function PrivacyPage() {
             </section>
 
             <section>
-              <h2 className="text-xl font-semibold text-[#FAFAFA] mb-3">
+              <h2 className="text-xl font-semibold text-foreground mb-3">
                 Data retention
               </h2>
               <p>
@@ -78,7 +78,7 @@ export default function PrivacyPage() {
                 waitlist. You can request removal at any time by emailing{" "}
                 <a
                   href="mailto:contact@accelryde.com"
-                  className="text-[#FF6600] hover:underline"
+                  className="text-accent hover:underline"
                 >
                   contact@accelryde.com
                 </a>
@@ -87,19 +87,19 @@ export default function PrivacyPage() {
             </section>
 
             <section>
-              <h2 className="text-xl font-semibold text-[#FAFAFA] mb-3">
+              <h2 className="text-xl font-semibold text-foreground mb-3">
                 Third parties
               </h2>
               <p>
                 We do not sell your data. Your email is stored in Google Sheets
-                in Google Sheets for waitlist management. We may use
+                for waitlist management. We may use
                 third-party hosting and analytics services that process data on
                 our behalf under their own privacy policies.
               </p>
             </section>
 
             <section>
-              <h2 className="text-xl font-semibold text-[#FAFAFA] mb-3">
+              <h2 className="text-xl font-semibold text-foreground mb-3">
                 Cookies
               </h2>
               <p>
@@ -110,14 +110,14 @@ export default function PrivacyPage() {
             </section>
 
             <section>
-              <h2 className="text-xl font-semibold text-[#FAFAFA] mb-3">
+              <h2 className="text-xl font-semibold text-foreground mb-3">
                 Contact
               </h2>
               <p>
                 If you have questions about this policy, email us at{" "}
                 <a
                   href="mailto:contact@accelryde.com"
-                  className="text-[#FF6600] hover:underline"
+                  className="text-accent hover:underline"
                 >
                   contact@accelryde.com
                 </a>
@@ -126,7 +126,7 @@ export default function PrivacyPage() {
             </section>
 
             <section>
-              <h2 className="text-xl font-semibold text-[#FAFAFA] mb-3">
+              <h2 className="text-xl font-semibold text-foreground mb-3">
                 Changes to this policy
               </h2>
               <p>

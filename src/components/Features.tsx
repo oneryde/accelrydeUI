@@ -50,13 +50,12 @@ function PhoneCarousel({
     <div className="flex flex-col items-center gap-4">
       {/* Phone frame */}
       <div
-        className="relative mx-auto w-full max-w-[280px] aspect-[9/19] rounded-[2rem] border-2 border-[#27272A] bg-[#0E0E10] overflow-hidden"
+        className="relative mx-auto w-full max-w-[280px] aspect-[9/19] rounded-[2rem] border-2 border-border bg-phone-frame overflow-hidden"
         style={{
-          boxShadow: `0 0 80px ${accent}10, 0 8px 32px rgba(0,0,0,0.4)`,
+          boxShadow: `0 0 80px ${accent}14, 0 8px 32px rgba(0,0,0,0.25)`,
         }}
       >
-        {/* Notch */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-5 bg-[#09090B] rounded-b-xl z-20" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-5 bg-phone-notch rounded-b-xl z-20" />
 
         {/* Screens with crossfade */}
         {screens.map((screen, idx) => (
@@ -70,7 +69,7 @@ function PhoneCarousel({
         ))}
 
         {/* Home indicator */}
-        <div className="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-20 h-1 bg-[#3f3f46] rounded-full z-20" />
+        <div className="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-20 h-1 bg-phone-home rounded-full z-20" />
       </div>
 
       {/* Dot indicators + labels */}
@@ -85,13 +84,13 @@ function PhoneCarousel({
             <span
               className="block w-2 h-2 rounded-full transition-all duration-300"
               style={{
-                backgroundColor: idx === active ? accent : "#3f3f46",
+                backgroundColor: idx === active ? accent : "var(--color-phone-home)",
                 transform: idx === active ? "scale(1.2)" : "scale(1)",
               }}
             />
             <span
               className="text-[10px] font-medium transition-colors duration-300 hidden sm:inline"
-              style={{ color: idx === active ? "#FAFAFA" : "#52525B" }}
+              style={{ color: idx === active ? "var(--color-foreground)" : "var(--color-muted)" }}
             >
               {label}
             </span>
@@ -109,12 +108,12 @@ function PhoneCarousel({
 function PhoneFrame({ screen, accent }: { screen: ReactNode; accent: string }) {
   return (
     <div
-      className="relative mx-auto w-full max-w-[280px] aspect-[9/19] rounded-[2rem] border-2 border-[#27272A] bg-[#0E0E10] overflow-hidden"
+      className="relative mx-auto w-full max-w-[280px] aspect-[9/19] rounded-[2rem] border-2 border-border bg-phone-frame overflow-hidden"
       style={{
-        boxShadow: `0 0 80px ${accent}10, 0 8px 32px rgba(0,0,0,0.4)`,
+        boxShadow: `0 0 80px ${accent}14, 0 8px 32px rgba(0,0,0,0.25)`,
       }}
     >
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-5 bg-[#09090B] rounded-b-xl z-20" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-5 bg-phone-notch rounded-b-xl z-20" />
       <div className="absolute inset-0 pt-5 overflow-hidden">{screen}</div>
       <div className="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-20 h-1 bg-[#3f3f46] rounded-full z-20" />
     </div>
@@ -234,14 +233,14 @@ function FeatureCard({ feature, index }: { feature: Feature; index: number }) {
           >
             {feature.number}
           </span>
-          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#52525B]">
+          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
             {feature.subtitle}
           </span>
         </div>
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#FAFAFA] leading-tight">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground leading-tight">
           {feature.title}
         </h2>
-        <p className="text-base sm:text-lg text-[#A1A1AA] leading-relaxed max-w-lg">
+        <p className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-lg">
           {feature.description}
         </p>
       </div>
@@ -271,18 +270,18 @@ export default function Features() {
     <section id="product" className="relative">
       <div className="max-w-7xl mx-auto px-6 pt-20">
         <div className="text-center mb-8">
-          <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#FF6600]">
+          <span className="text-xs font-semibold uppercase tracking-[0.3em] text-accent">
             The Product
           </span>
-          <h2 className="mt-4 text-3xl sm:text-4xl font-bold text-[#FAFAFA] tracking-tight">
+          <h2 className="mt-4 text-3xl sm:text-4xl font-bold text-foreground tracking-tight">
             Built for riders, not commuters
           </h2>
-          <p className="mt-4 text-[#A1A1AA] max-w-xl mx-auto">
+          <p className="mt-4 text-muted-foreground max-w-xl mx-auto">
             Five pillars that replace the patchwork of apps you use today.
           </p>
         </div>
 
-        <div className="divide-y divide-[#18181B]">
+        <div className="divide-y divide-divide">
           {features.map((feature, index) => (
             <FeatureCard key={feature.number} feature={feature} index={index} />
           ))}
