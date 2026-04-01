@@ -6,7 +6,9 @@ import { fileURLToPath } from "url";
 const projectRoot = path.dirname(fileURLToPath(import.meta.url));
 
 const nextConfig: NextConfig = {
-  outputFileTracingRoot: projectRoot,
+  // Only needed locally when a parent directory has another lockfile (e.g. home).
+  // On Vercel, `VERCEL` is set — omit so file tracing uses the deployment root only.
+  ...(process.env.VERCEL ? {} : { outputFileTracingRoot: projectRoot }),
 };
 
 export default nextConfig;
