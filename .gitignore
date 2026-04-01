@@ -1,0 +1,28 @@
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+
+# next.js
+/.next/
+/out/
+
+# env / secrets (never commit API keys or service account JSON)
+.env
+.env*.local
+*.pem
+google-sheets-service-account.json
+*-service-account*.json
+# Google Cloud / Vertex AI client key downloads (filename varies)
+gen-lang-client*.json
+
+# debug
+npm-debug.log*
+
+# typescript
+next-env.d.ts
+
+# ide
+.idea
+.vscode
