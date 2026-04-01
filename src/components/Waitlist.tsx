@@ -29,12 +29,10 @@ export default function Waitlist() {
     e.preventDefault();
     setErrorMsg("");
 
-    // Honeypot check
     const form = e.currentTarget;
     const honeypot = (form.elements.namedItem("website") as HTMLInputElement)?.value;
     if (honeypot) return;
 
-    // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       setErrorMsg("Please enter a valid email address.");
@@ -69,9 +67,8 @@ export default function Waitlist() {
       ref={sectionRef}
       className="relative py-32 overflow-hidden"
     >
-      {/* Background glow */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] opacity-20 rounded-full bg-gradient-to-r from-[#FF6600]/30 via-[#FF6600]/10 to-[#3B82F6]/30 blur-3xl" />
+        <div className="waitlist-ambient-glow absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] rounded-full bg-gradient-to-r from-accent/25 via-accent/10 to-secondary/25 blur-3xl" />
       </div>
 
       <div
@@ -79,22 +76,22 @@ export default function Waitlist() {
           visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
         }`}
       >
-        <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#FF6600]">
+        <span className="text-xs font-semibold uppercase tracking-[0.3em] text-accent">
           Early Access
         </span>
-        <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#FAFAFA]">
+        <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground">
           Help us ship it right
         </h2>
-        <p className="mt-4 text-[#A1A1AA] text-lg max-w-lg mx-auto">
+        <p className="mt-4 text-muted-foreground text-lg max-w-lg mx-auto">
           Join the beta waitlist. Early riders shape the product — your feedback
           lands directly in our build queue.
         </p>
 
         {status === "success" ? (
-          <div className="mt-10 p-6 rounded-2xl border border-[#FF6600]/20 bg-[#FF6600]/5">
+          <div className="mt-10 p-6 rounded-2xl border border-accent/20 bg-accent/5">
             <div className="text-2xl mb-2">&#10003;</div>
-            <p className="text-[#FAFAFA] font-semibold">You&apos;re on the list</p>
-            <p className="text-[#A1A1AA] text-sm mt-1">
+            <p className="text-foreground font-semibold">You&apos;re on the list</p>
+            <p className="text-muted-foreground text-sm mt-1">
               We&apos;ll reach out when the beta is ready. Thanks for riding with us early.
             </p>
           </div>
@@ -110,9 +107,8 @@ export default function Waitlist() {
                   placeholder="your@email.com"
                   required
                   autoComplete="email"
-                  className="w-full px-5 py-3.5 rounded-xl bg-[#18181B] border border-[#27272A] text-[#FAFAFA] placeholder-[#52525B] focus:outline-none focus:border-[#FF6600] focus:ring-1 focus:ring-[#FF6600] transition-colors text-sm"
+                  className="w-full px-5 py-3.5 rounded-xl bg-card border border-border text-foreground placeholder:text-muted focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-colors text-sm"
                 />
-                {/* Honeypot */}
                 <input
                   type="text"
                   name="website"
@@ -125,7 +121,7 @@ export default function Waitlist() {
               <button
                 type="submit"
                 disabled={status === "loading"}
-                className="px-7 py-3.5 rounded-xl bg-[#FF6600] text-white font-semibold hover:bg-[#E65C00] transition-all hover:shadow-[0_0_30px_rgba(255,102,0,0.2)] disabled:opacity-60 disabled:cursor-not-allowed text-sm whitespace-nowrap"
+                className="px-7 py-3.5 rounded-xl bg-accent text-white font-semibold hover:bg-accent-hover transition-all hover:shadow-[0_0_30px_rgba(255,102,0,0.2)] disabled:opacity-60 disabled:cursor-not-allowed text-sm whitespace-nowrap"
               >
                 {status === "loading" ? (
                   <span className="flex items-center gap-2">
@@ -142,13 +138,13 @@ export default function Waitlist() {
             </div>
 
             {status === "error" && errorMsg && (
-              <p className="mt-3 text-sm text-red-400">{errorMsg}</p>
+              <p className="mt-3 text-sm text-red-500 dark:text-red-400">{errorMsg}</p>
             )}
 
-            <p className="mt-4 text-xs text-[#52525B]">
+            <p className="mt-4 text-xs text-muted">
               We&apos;ll only use your email to send beta updates. No spam, ever.
               See our{" "}
-              <a href="/privacy" className="underline hover:text-[#A1A1AA] transition-colors">
+              <a href="/privacy" className="underline hover:text-muted-foreground transition-colors">
                 Privacy Policy
               </a>
               .

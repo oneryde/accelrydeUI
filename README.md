@@ -12,6 +12,8 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
+**Themes:** Use the **Light** / **Dark** control in the nav to preview the white / grey (“blackish” text on light background) look. Choice is saved in `localStorage`. You can also open `?theme=light` or `?theme=dark` once to set the theme.
+
 ## Waitlist Endpoint Setup (Google Apps Script)
 
 The beta waitlist form submits to a Google Apps Script Web App that appends rows to a Google Sheet.
