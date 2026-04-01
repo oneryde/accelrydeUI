@@ -51,14 +51,11 @@ function parseServiceAccount(): ServiceAccountCredentials | null {
 }
 
 /**
- * True when we can attempt a Sheets write: service account (required for reliable writes)
- * or API key (Google usually rejects append with API keys — prefer service account).
+ * True only when a service account JSON is available. API keys cannot append rows;
+ * if we treated API-key-only as "configured", production would always get 502 from Google.
  */
 export function isSheetsWaitlistConfigured(): boolean {
-  return (
-    parseServiceAccount() !== null ||
-    Boolean(process.env.GOOGLE_SHEETS_API_KEY?.trim())
-  );
+  return parseServiceAccount() !== null;
 }
 
 /**
@@ -90,33 +87,38 @@ export async function appendWaitlistRow(row: {
   });
 
   if (sa) {
-    const jwt = new JWT({
-      email: sa.client_email,
-      key: sa.private_key,
-      scopes: ["https://www.googleapis.com/auth/spreadsheets"],
-    });
+    try {
+      const jwt = new JWT({
+        email: sa.client_email,
+        key: sa.private_key,
+        scopes: ["https://www.googleapis.com/auth/spreadsheets"],
+      });
 
-    const access = await jwt.getAccessToken();
-    const token = typeof access === "string" ? access : access?.token;
-    if (!token) {
-      return { ok: false, error: "Could not obtain access token for Google Sheets." };
+      const access = await jwt.getAccessToken();
+      const token = typeof access === "string" ? access : access?.token;
+      if (!token) {
+        return { ok: false, error: "Could not obtain access token for Google Sheets." };
+      }
+
+      const res = await fetch(url.toString(), {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body,
+      });
+
+      if (!res.ok) {
+        const text = await res.text();
+        console.error("Google Sheets API error:", res.status, text);
+        return { ok: false, error: "Google Sheets rejected the write." };
+      }
+      return { ok: true };
+    } catch (e) {
+      console.error("Google Sheets append exception:", e);
+      return { ok: false, error: "Sheets request failed." };
     }
-
-    const res = await fetch(url.toString(), {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      body,
-    });
-
-    if (!res.ok) {
-      const text = await res.text();
-      console.error("Google Sheets API error:", res.status, text);
-      return { ok: false, error: "Google Sheets rejected the write." };
-    }
-    return { ok: true };
   }
 
   // API keys are not supported by Google for append on private sheets; this usually returns 401/403.

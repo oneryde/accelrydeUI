@@ -17,6 +17,7 @@ google-sheets-service-account.json
 # Google Cloud / Vertex AI client key downloads (filename varies)
 gen-lang-client*.json
 
+
 # debug
 npm-debug.log*
 

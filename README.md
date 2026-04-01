@@ -54,6 +54,17 @@ Add the Web App URL to `.env.local`:
 WAITLIST_WEBAPP_URL=https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec
 ```
 
+### Production (Vercel) — avoid 502 on Join beta
+
+The API route needs **one** of these in **Vercel → Project → Settings → Environment Variables** (Production):
+
+1. **`GOOGLE_SHEETS_SERVICE_ACCOUNT_JSON`** — full service account JSON (one line). Google Sheets API must be enabled; share the sheet with the service account email as **Editor**.  
+   - Do **not** rely on **`GOOGLE_SHEETS_API_KEY` alone** — API keys cannot append rows; the app only uses a service account for Sheets writes.
+
+2. **`WAITLIST_WEBAPP_URL`** — your deployed Apps Script web app URL (same as local). Used if Sheets JSON is not set.
+
+If neither is set (or only an API key is set), users see **503** until you add (1) or (2). A **502** usually means a service account is configured but the Google request failed — check Vercel **Functions** logs and that the sheet tab matches **`GOOGLE_SHEETS_APPEND_RANGE`** (default `Sheet1!A:C`).
+
 ## Store Badge Compliance
 
 The store badges in `StoreBadges.tsx` use inline SVG representations. Before going live:
